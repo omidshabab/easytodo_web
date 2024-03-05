@@ -1,5 +1,5 @@
 import AuthForm from "@/components/auth/Form";
-import Link from "next/link"; 
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -12,6 +12,11 @@ const Page = async () => {
           Username
         </Label>
         <Input name="username" id="username" />
+        <br />
+        <Label htmlFor="email" className="text-muted-foreground">
+          Email
+        </Label>
+        <Input name="email" id="email" />
         <br />
         <Label htmlFor="password" className="text-muted-foreground">
           Password

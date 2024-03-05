@@ -8,6 +8,13 @@ import {
   insertTodoParams,
   updateTodoParams,
 } from "@/lib/db/schema/todos";
+import { api } from "@/lib/trpc/api";
+
+export async function GET() {
+  const { todos } = await api.todos.getTodos.query();
+
+  return NextResponse.json(todos, { status: 200 });
+}
 
 export async function POST(req: Request) {
   try {

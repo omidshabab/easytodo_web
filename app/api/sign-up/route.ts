@@ -8,6 +8,7 @@ import type { NextRequest } from "next/server";
 export const POST = async (request: NextRequest) => {
   const formData = await request.formData();
   const username = formData.get("username");
+  const email = formData.get("email");
   const password = formData.get("password");
   // basic check
   if (
@@ -18,6 +19,16 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json(
       {
         error: "Invalid username",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+  if (typeof email !== "string" || email.length < 4 || email.length > 31) {
+    return NextResponse.json(
+      {
+        error: "Invalid email",
       },
       {
         status: 400,
@@ -48,7 +59,7 @@ export const POST = async (request: NextRequest) => {
       attributes: {
         username,
         name: "",
-        email: "",
+        email,
       },
     });
     const session = await auth.createSession({

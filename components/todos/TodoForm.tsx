@@ -63,6 +63,16 @@ const TodoForm = ({
     toast.success(`Todo ${action}d!`);
   };
 
+  const onError = async (action: "create" | "update" | "delete",
+    data?: { error?: string },) => {
+    if (data?.error) {
+      toast.error(data.error)
+      return;
+    }
+
+    toast.error(`Todo ${action} failed!`);
+  };
+
   const { mutate: createTodo, isLoading: isCreating } =
     trpc.todos.createTodo.useMutation({
       onSuccess: (res) => onSuccess("create"),
